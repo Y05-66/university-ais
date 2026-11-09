@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ais.system.mapper.DictDataMapper">
+
+    <select id="selectByType" resultType="com.ais.system.entity.DictData">
+        SELECT * FROM dict_data WHERE dict_type = #{dictType} AND deleted = 0 ORDER BY sort
+    </select>
+
+</mapper>

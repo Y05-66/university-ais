@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ais.exam.mapper.ExamMapper">
+
+    <resultMap id="ExamResultMap" type="com.ais.exam.entity.Exam">
+        <id column="id" property="id"/>
+        <result column="course_offer_id" property="courseOfferId"/>
+        <result column="exam_type" property="examType"/>
+        <result column="exam_date" property="examDate"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="classroom" property="classroom"/>
+        <result column="seat_count" property="seatCount"/>
+        <result column="invigilator" property="invigilator"/>
+        <result column="status" property="status"/>
+        <result column="deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="courseName" property="courseName"/>
+        <result column="teacherName" property="teacherName"/>
+    </resultMap>
+
+    <select id="selectPageWithJoin" resultMap="ExamResultMap">
+        SELECT e.*,
+               c.name AS courseName,
+               t.name AS teacherName
+        FROM exam e
+        INNER JOIN course_offer co ON e.course_offer_id = co.id AND co.deleted = 0
+        LEFT JOIN course c ON co.course_id = c.id AND c.deleted = 0
+        LEFT JOIN teacher t ON co.teacher_id = t.id AND t.deleted = 0
+        <where>
+            e.deleted = 0
+            <if test="params.examId != null">AND e.id = #{params.examId}</if>
+            <if test="params.courseOfferId != null">AND e.course_offer_id = #{params.courseOfferId}</if>
+            <if test="params.examType != null">AND e.exam_type = #{params.examType}</if>
+            <if test="params._emptyFilter != null">AND e.id = -1</if>
+            <if test="params.examIds != null and !params.examIds.isEmpty()">
+                AND e.id IN
+                <foreach collection="params.examIds" item="examId" open="(" separator="," close=")">
+                    #{examId}
+                </foreach>
+            </if>
+            <if test="params.courseOfferIds != null and !params.courseOfferIds.isEmpty()">
+                AND e.course_offer_id IN
+                <foreach collection="params.courseOfferIds" item="courseOfferId" open="(" separator="," close=")">
+                    #{courseOfferId}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY e.exam_date ASC, e.start_time ASC
+    </select>
+
+    <select id="selectExamIdsByTeacherId" resultType="java.lang.Long">
+        SELECT DISTINCT e.id
+        FROM exam e
+        INNER JOIN exam_invigilate ei ON e.id = ei.exam_id AND ei.deleted = 0
+        WHERE e.deleted = 0 AND ei.teacher_id = #{teacherId}
+    </select>
+
+</mapper>

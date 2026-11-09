@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大学教务管理系统</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      #app { height: 100vh; }
+      .loading-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #f5f7fa;
+      }
+      .loading-page span {
+        font-size: 18px;
+        color: #909399;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="loading-page"><span>系统加载中...</span></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

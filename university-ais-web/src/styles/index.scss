@@ -1,0 +1,373 @@
+/* 全局样式 - 支持白天/黑夜模式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
+}
+
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ========== 白天模式 ========== */
+body.light-theme {
+  background-color: #f5f7fa;
+  color: #303133;
+}
+
+/* ========== 黑夜模式 ========== */
+body.dark-theme {
+  background-color: #1e1e2f;
+  color: #e0e0e0;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c0c4cc;
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background-color: #4a4a6a;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* ========== Element Plus 黑夜模式变量 ========== */
+.dark-theme {
+  --el-bg-color: #1e1e2f;
+  --el-bg-color-overlay: #252538;
+  --el-border-color: #3a3a52;
+  --el-border-color-light: #2e2e42;
+  --el-border-color-lighter: #3a3a52;
+  --el-border-color-base: #3a3a52;
+  --el-text-color-primary: #e0e0e0;
+  --el-text-color-regular: #b0b0c0;
+  --el-text-color-secondary: #808090;
+  --el-text-color-placeholder: #6a6a80;
+  --el-fill-color: #252538;
+  --el-fill-color-light: #1e1e2f;
+  --el-fill-color-lighter: #252538;
+  --el-fill-color-dark: #2e2e42;
+  --el-table-bg-color: #1e1e2f;
+  --el-table-tr-bg-color: #1e1e2f;
+  --el-table-header-bg-color: #252538;
+  --el-table-border-color: #2e2e42;
+  --el-table-text-color: #b0b0c0;
+  --el-table-header-text-color: #e0e0e0;
+  --el-table-row-hover-bg-color: #252538;
+  --el-card-bg-color: #252538;
+  --el-input-bg-color: #1e1e2f;
+  --el-input-text-color: #e0e0e0;
+  --el-input-border-color: #3a3a52;
+  --el-dialog-bg-color: #252538;
+  --el-dialog-title-font-color: #e0e0e0;
+  --el-button-disabled-bg-color: #252538;
+  --el-button-disabled-border-color: #3a3a52;
+  --el-dropdown-menu-bg-color: #252538;
+  --el-dropdown-menu-item-hover-bg-color: #2e2e42;
+  --el-tag-bg-color: #2e2e42;
+  --el-tag-border-color: #3a3a52;
+  --el-pagination-bg-color: #1e1e2f;
+  --el-pagination-button-bg-color: #252538;
+  --el-menu-bg-color: #1a1a2e;
+  --el-menu-text-color: #b0b0c0;
+  --el-menu-hover-bg-color: rgba(255,255,255,0.05);
+  --el-menu-active-color: #6c8cff;
+  --el-form-item-label-text-color: #b0b0c0;
+  --el-form-label-color: #b0b0c0;
+  --el-divider-color: #2e2e42;
+  --el-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.4);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.3);
+  --el-message-bg-color: #252538;
+  --el-message-border-color: #3a3a52;
+  --el-message-text-color: #e0e0e0;
+  --el-tooltip-bg-color: #2e2e42;
+  --el-tooltip-text-color: #e0e0e0;
+  --el-switch-on-color: #6c8cff;
+  --el-switch-off-color: #3a3a52;
+  --el-checkbox-checked-bg-color: #6c8cff;
+  --el-checkbox-checked-border-color: #6c8cff;
+  --el-checkbox-input-border-color: #3a3a52;
+  --el-checkbox-input-fill: #1e1e2f;
+  --el-radio-checked-bg-color: #6c8cff;
+  --el-radio-checked-border-color: #6c8cff;
+  --el-radio-input-border-color: #3a3a52;
+  --el-radio-input-fill: #1e1e2f;
+  --el-date-editor-bg-color: #1e1e2f;
+  --el-date-editor-border-color: #3a3a52;
+  --el-calendar-bg-color: #252538;
+  --el-cascader-menu-bg-color: #252538;
+  --el-cascader-menu-border-color: #3a3a52;
+  --el-tree-node-hover-bg-color: #252538;
+  --el-upload-dragger-bg-color: #1e1e2f;
+  --el-upload-dragger-border-color: #3a3a52;
+  --el-color-primary: #6c8cff;
+}
+
+/* ========== Element Plus 白天模式变量 ========== */
+.light-theme {
+  --el-bg-color: #ffffff;
+  --el-bg-color-overlay: #ffffff;
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+  --el-border-color-base: #dcdfe6;
+  --el-text-color-primary: #303133;
+  --el-text-color-regular: #606266;
+  --el-text-color-secondary: #909399;
+  --el-text-color-placeholder: #c0c4cc;
+  --el-fill-color: #f5f7fa;
+  --el-fill-color-light: #fafafa;
+  --el-fill-color-lighter: #f5f7fa;
+  --el-fill-color-dark: #f0f2f5;
+  --el-table-bg-color: #ffffff;
+  --el-table-tr-bg-color: #ffffff;
+  --el-table-header-bg-color: #f5f7fa;
+  --el-table-border-color: #ebeef5;
+  --el-table-text-color: #606266;
+  --el-table-header-text-color: #303133;
+  --el-table-row-hover-bg-color: #f5f7fa;
+  --el-card-bg-color: #ffffff;
+  --el-input-bg-color: #ffffff;
+  --el-input-text-color: #303133;
+  --el-input-border-color: #dcdfe6;
+  --el-dialog-bg-color: #ffffff;
+  --el-dialog-title-font-color: #303133;
+  --el-button-disabled-bg-color: #f5f7fa;
+  --el-button-disabled-border-color: #e4e7ed;
+  --el-dropdown-menu-bg-color: #ffffff;
+  --el-dropdown-menu-item-hover-bg-color: #f5f7fa;
+  --el-tag-bg-color: #f5f7fa;
+  --el-tag-border-color: #e4e7ed;
+  --el-pagination-bg-color: #ffffff;
+  --el-pagination-button-bg-color: #ffffff;
+  --el-menu-bg-color: #304156;
+  --el-menu-text-color: rgba(255,255,255,0.9);
+  --el-menu-hover-bg-color: rgba(255,255,255,0.1);
+  --el-menu-active-color: #409eff;
+  --el-form-item-label-text-color: #606266;
+  --el-form-label-color: #606266;
+  --el-divider-color: #e4e7ed;
+  --el-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.08);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.06);
+  --el-message-bg-color: #ffffff;
+  --el-message-border-color: #e4e7ed;
+  --el-message-text-color: #303133;
+  --el-tooltip-bg-color: #303133;
+  --el-tooltip-text-color: #ffffff;
+  --el-switch-on-color: #409eff;
+  --el-switch-off-color: #dcdfe6;
+  --el-checkbox-checked-bg-color: #409eff;
+  --el-checkbox-checked-border-color: #409eff;
+  --el-checkbox-input-border-color: #dcdfe6;
+  --el-checkbox-input-fill: #ffffff;
+  --el-radio-checked-bg-color: #409eff;
+  --el-radio-checked-border-color: #409eff;
+  --el-radio-input-border-color: #dcdfe6;
+  --el-radio-input-fill: #ffffff;
+  --el-date-editor-bg-color: #ffffff;
+  --el-date-editor-border-color: #dcdfe6;
+  --el-calendar-bg-color: #ffffff;
+  --el-cascader-menu-bg-color: #ffffff;
+  --el-cascader-menu-border-color: #ebeef5;
+  --el-tree-node-hover-bg-color: #f5f7fa;
+  --el-upload-dragger-bg-color: #f5f7fa;
+  --el-upload-dragger-border-color: #dcdfe6;
+  --el-color-primary: #409eff;
+}
+
+/* ========== 通用元素覆盖 ========== */
+.dark-theme .el-card,
+.dark-theme .el-dialog,
+.dark-theme .el-drawer,
+.dark-theme .el-menu--popup,
+.dark-theme .el-select-dropdown,
+.dark-theme .el-popper {
+  background-color: #252538 !important;
+  border-color: #3a3a52 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-theme .el-input__wrapper,
+.dark-theme .el-textarea__inner,
+.dark-theme .el-select .el-input__wrapper {
+  background-color: #1e1e2f !important;
+  border-color: #3a3a52 !important;
+}
+
+.dark-theme .el-table th.el-table__cell {
+  background-color: #252538 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-theme .el-table td.el-table__cell {
+  background-color: #1e1e2f !important;
+  color: #b0b0c0 !important;
+  border-color: #2e2e42 !important;
+}
+
+.dark-theme .el-pagination {
+  background-color: #1e1e2f !important;
+}
+
+.dark-theme .el-pagination button,
+.dark-theme .el-pagination .el-pager li {
+  background-color: #252538 !important;
+  color: #b0b0c0 !important;
+  border-color: #3a3a52 !important;
+}
+
+.dark-theme .el-pagination .el-pager li.active {
+  background-color: #6c8cff !important;
+  color: #fff !important;
+}
+
+.dark-theme .el-tag {
+  background-color: #2e2e42 !important;
+  border-color: #3a3a52 !important;
+  color: #b0b0c0 !important;
+}
+
+.dark-theme .el-divider {
+  background-color: #2e2e42 !important;
+}
+
+.dark-theme .el-loading-mask {
+  background-color: rgba(30, 30, 47, 0.8) !important;
+}
+
+.dark-theme .el-empty__description {
+  color: #808090 !important;
+}
+
+.dark-theme .el-message,
+.dark-theme .el-notification {
+  background-color: #252538 !important;
+  border-color: #3a3a52 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-theme .el-message-box {
+  background-color: #252538 !important;
+  border-color: #3a3a52 !important;
+}
+
+.dark-theme .el-message-box__title {
+  color: #e0e0e0 !important;
+}
+
+.dark-theme .el-message-box__message {
+  color: #b0b0c0 !important;
+}
+
+.dark-theme .el-date-editor {
+  background-color: #1e1e2f !important;
+}
+
+.dark-theme .el-date-table td {
+  color: #b0b0c0 !important;
+}
+
+.dark-theme .el-date-table td.today span {
+  color: #6c8cff !important;
+  font-weight: bold;
+}
+
+.dark-theme .el-date-table td.selected span {
+  background-color: #6c8cff !important;
+}
+
+.dark-theme .el-slider__runway {
+  background-color: #3a3a52 !important;
+}
+
+.dark-theme .el-slider__bar {
+  background-color: #6c8cff !important;
+}
+
+.dark-theme .el-progress-bar__inner {
+  background-color: #6c8cff !important;
+}
+
+.dark-theme .el-rate__icon {
+  color: #3a3a52 !important;
+}
+
+.dark-theme .el-rate__icon.is-active {
+  color: #f7ba2a !important;
+}
+
+.dark-theme .el-tabs__item {
+  color: #b0b0c0 !important;
+}
+
+.dark-theme .el-tabs__item.is-active {
+  color: #6c8cff !important;
+}
+
+.dark-theme .el-tabs__active-bar {
+  background-color: #6c8cff !important;
+}
+
+/* ========== 面包屑导航样式 ========== */
+.light-theme .el-breadcrumb__item a {
+  color: #909399;
+}
+.light-theme .el-breadcrumb__separator {
+  color: #c0c4cc;
+}
+.light-theme .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: #303133;
+}
+.light-theme .el-breadcrumb__item:last-child .el-breadcrumb__inner.is-link {
+  color: #303133;
+}
+
+.dark-theme .el-breadcrumb__item a,
+.dark-theme .el-breadcrumb__separator {
+  color: #808090 !important;
+}
+
+.dark-theme .el-breadcrumb__item:last-child a {
+  color: #e0e0e0 !important;
+}
+
+/* 侧边栏logo颜色统一 - 与菜单文字一致 */
+#sidebar-logo,
+#sidebar-logo .el-icon,
+#sidebar-logo .logo-text {
+  color: #ffffff !important;
+}
+.dark-theme #sidebar-logo,
+.dark-theme #sidebar-logo .el-icon,
+.dark-theme #sidebar-logo .logo-text {
+  color: #e6edf3 !important;
+}
+.logo .el-icon,
+.logo .logo-text {
+  color: rgba(255,255,255,0.85) !important;
+}
+.dark-theme .logo .el-icon,
+.dark-theme .logo .logo-text {
+  color: #e6edf3 !important;
+}
+.sidebar {
+  & .logo .el-icon,
+  & .logo-text {
+    color: rgba(255,255,255,0.85) !important;
+  }
+}

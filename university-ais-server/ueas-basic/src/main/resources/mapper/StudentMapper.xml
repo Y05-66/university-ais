@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ais.basic.mapper.StudentMapper">
+
+    <select id="selectPage" resultType="com.ais.basic.entity.Student">
+        SELECT s.*, c.name as className, m.name as majorName, cl.name as collegeName
+        FROM student s
+        LEFT JOIN class_info c ON s.class_id = c.id AND c.deleted = 0
+        LEFT JOIN major m ON s.major_id = m.id AND m.deleted = 0
+        LEFT JOIN college cl ON s.college_id = cl.id AND cl.deleted = 0
+        WHERE s.deleted = 0
+        <if test="params.studentNo != null and params.studentNo != ''">
+            AND s.student_no LIKE CONCAT('%', #{params.studentNo}, '%')
+        </if>
+        <if test="params.name != null and params.name != ''">
+            AND s.name LIKE CONCAT('%', #{params.name}, '%')
+        </if>
+        <if test="params.collegeId != null">
+            AND s.college_id = #{params.collegeId}
+        </if>
+        <if test="params.grade != null and params.grade != ''">
+            AND s.grade = #{params.grade}
+        </if>
+        ORDER BY s.create_time DESC
+    </select>
+
+    <select id="selectDetailById" resultType="com.ais.basic.entity.Student">
+        SELECT s.*, c.name as className, m.name as majorName, cl.name as collegeName
+        FROM student s
+        LEFT JOIN class_info c ON s.class_id = c.id AND c.deleted = 0
+        LEFT JOIN major m ON s.major_id = m.id AND m.deleted = 0
+        LEFT JOIN college cl ON s.college_id = cl.id AND cl.deleted = 0
+        WHERE s.id = #{id} AND s.deleted = 0
+    </select>
+
+</mapper>

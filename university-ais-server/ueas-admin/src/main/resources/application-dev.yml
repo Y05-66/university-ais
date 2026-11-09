@@ -1,0 +1,4 @@
+# 跨域配置
+springfox:
+  documentation:
+    enabled: true

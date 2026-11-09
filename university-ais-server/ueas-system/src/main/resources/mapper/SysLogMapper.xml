@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ais.system.mapper.SysLogMapper">
+
+    <select id="selectPage" resultType="com.ais.system.entity.SysLog">
+        SELECT id, username, operation, method, params, ip, status, duration, create_time
+        FROM sys_log WHERE deleted = 0
+        <if test="params.username != null and params.username != ''">
+            AND username LIKE CONCAT('%', #{params.username}, '%')
+        </if>
+        <if test="params.status != null">
+            AND status = #{params.status}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

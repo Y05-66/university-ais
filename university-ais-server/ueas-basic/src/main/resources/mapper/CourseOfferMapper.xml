@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ais.basic.mapper.CourseOfferMapper">
+
+    <resultMap id="CourseOfferResultMap" type="com.ais.basic.entity.CourseOffer">
+        <id column="id" property="id"/>
+        <result column="course_id" property="courseId"/>
+        <result column="teacher_id" property="teacherId"/>
+        <result column="semester_id" property="semesterId"/>
+        <result column="classroom" property="classroom"/>
+        <result column="schedule" property="schedule"/>
+        <result column="weeks" property="weeks"/>
+        <result column="enrolled" property="enrolled"/>
+        <result column="max_students" property="maxStudents"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+        <result column="courseName" property="courseName"/>
+        <result column="courseNo" property="courseNo"/>
+        <result column="teacherName" property="teacherName"/>
+        <result column="semesterName" property="semesterName"/>
+        <result column="credits" property="credits"/>
+        <result column="category" property="category"/>
+        <result column="version" property="version"/>
+    </resultMap>
+
+    <select id="selectPageWithJoin" resultMap="CourseOfferResultMap">
+        SELECT co.*, c.name as courseName, c.course_no as courseNo,
+               t.name as teacherName, s.name as semesterName, c.credits as credits, c.category as category
+        FROM course_offer co
+        LEFT JOIN course c ON co.course_id = c.id AND c.deleted = 0
+        LEFT JOIN teacher t ON co.teacher_id = t.id AND t.deleted = 0
+        LEFT JOIN semester s ON co.semester_id = s.id AND s.deleted = 0
+        <where>
+            co.deleted = 0
+            <if test="params.courseId != null">AND co.course_id = #{params.courseId}</if>
+            <if test="params.teacherId != null">AND co.teacher_id = #{params.teacherId}</if>
+            <if test="params.semesterId != null">AND co.semester_id = #{params.semesterId}</if>
+        </where>
+        ORDER BY co.create_time DESC
+    </select>
+
+    <select id="selectByConditions" resultMap="CourseOfferResultMap">
+        SELECT co.*, c.name as courseName, c.course_no as courseNo,
+               t.name as teacherName, s.name as semesterName, c.credits as credits, c.category as category
+        FROM course_offer co
+        LEFT JOIN course c ON co.course_id = c.id AND c.deleted = 0
+        LEFT JOIN teacher t ON co.teacher_id = t.id AND t.deleted = 0
+        LEFT JOIN semester s ON co.semester_id = s.id
+        <where>
+            co.deleted = 0
+            <if test="courseId != null">AND co.course_id = #{courseId}</if>
+            <if test="teacherId != null">AND co.teacher_id = #{teacherId}</if>
+            <if test="semesterId != null">AND co.semester_id = #{semesterId}</if>
+        </where>
+        ORDER BY co.create_time DESC
+    </select>
+
+    <update id="incrementEnrolled">
+        UPDATE course_offer
+        SET enrolled = enrolled + 1, version = version + 1
+        WHERE id = #{id} AND deleted = 0 AND enrolled <![CDATA[<]]> max_students AND version = #{version}
+    </update>
+
+    <update id="decrementEnrolled">
+        UPDATE course_offer
+        SET enrolled = enrolled - 1, version = version + 1
+        WHERE id = #{id} AND deleted = 0 AND enrolled > 0 AND version = #{version}
+    </update>
+
+    <select id="selectPageByTeacherId" resultMap="CourseOfferResultMap">
+        SELECT co.*, c.name as courseName, c.course_no as courseNo,
+               t.name as teacherName, s.name as semesterName, c.credits as credits, c.category as category
+        FROM course_offer co
+        LEFT JOIN course c ON co.course_id = c.id AND c.deleted = 0
+        LEFT JOIN teacher t ON co.teacher_id = t.id AND t.deleted = 0
+        LEFT JOIN semester s ON co.semester_id = s.id
+        WHERE co.deleted = 0 AND co.teacher_id = #{teacherId}
+        ORDER BY co.create_time DESC
+    </select>
+
+</mapper>

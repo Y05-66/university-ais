@@ -1,0 +1,24 @@
+# AI 配置
+# 使用 OpenAI 兼容接口，替换为实际服务商地址和 API Key
+spring:
+  ai:
+    openai:
+      api-key: ${AI_API_KEY:sk-placeholder}
+      base-url: ${AI_BASE_URL:https://api.deepseek.com}
+      chat:
+        options:
+          model: ${AI_MODEL:deepseek-chat}
+          temperature: 0.7
+      embedding:
+        options:
+          model: ${AI_EMBEDDING_MODEL:text-embedding-ada-002}
+
+# AI 助手配置
+ai:
+  assistant:
+    # 是否启用 AI 功能（灰度开关）
+    enabled: true
+    # 请求超时（秒）
+    timeout-seconds: 30
+    # 最大 token 数
+    max-tokens: 2000

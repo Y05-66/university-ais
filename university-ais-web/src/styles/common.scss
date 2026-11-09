@@ -1,0 +1,30 @@
+.page-container {
+  padding: 20px;
+  min-height: calc(100vh - 120px);
+
+  .el-card {
+    border-radius: 8px;
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-form {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 6px;
+
+  .el-form-item {
+    margin-bottom: 0;
+  }
+}
+
+.el-pagination {
+  margin-top: 16px;
+  justify-content: flex-end;
+}
